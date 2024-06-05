@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:math';
 
 import 'package:calculator_application/custom_data_structure/stack.dart'
@@ -8,29 +7,34 @@ bool isDigit(String str) {
   return str.length == 1 && str.compareTo('0') >= 0 && str.compareTo('9') <= 0;
 }
 
-void addAsterisk(String expression) {
+String addAsterisk(String expression) {
+  print('start addAsterisk');
   String temp = '';
   for (int i = 0; i < expression.length; i++) {
-    if (expression[i] == '(' && isDigit(expression[i - 1])) {
+    print('on $i');
+    if (i > 0 && expression[i] == '(' && isDigit(expression[i - 1])) {
       temp += '*';
-    } else if (expression[i - 1] == ')' && isDigit(expression[i])) {
+    } else if (i > 0 && expression[i - 1] == ')' && isDigit(expression[i])) {
       temp += '*';
     }
     temp += expression[i];
   }
-  expression = temp;
+
+  print('end addAsterisk');
+  return temp;
 }
 
 List<String> getPostFix(String expression) {
   List<String> postFix = [];
   var op = custom_stack.Stack<String>();
-  Map<String, int> precedence = {};
-  precedence['+'] = 1;
-  precedence['-'] = 1;
-  precedence['*'] = 2;
-  precedence['/'] = 2;
-  precedence['^'] = 3;
-  precedence['('] = 4;
+  Map<String, int> precedence = {
+    '+': 1,
+    '-': 1,
+    '*': 2,
+    '/': 2,
+    '^': 3,
+    '(': 4,
+  };
 
   int i = 0;
   while (i < expression.length) {
@@ -39,44 +43,30 @@ List<String> getPostFix(String expression) {
     //* case 1: number (0 - 9)
     if (isDigit(ch) || ch == '.') {
       String temp = '';
-      while (isDigit(expression[i]) || expression[i] == '.') {
+      while (i < expression.length &&
+          (isDigit(expression[i]) || expression[i] == '.')) {
         temp += expression[i++];
       }
       postFix.add(temp);
 
-      if (i >= expression.length) {
-        break;
-      }
-
-      ch = expression[i];
-    }
-
-    //* case : when stack is empty
-    if (op.isEmpty()) {
-      op.push(ch);
+      continue;
     }
 
     //* case 2 : close braces )
     else if (ch == ')') {
-      while (op.peek() != '(') {
-        String temp = '${op.peek()}';
-        postFix.add(temp);
-
-        op.pop();
+      while (!op.isEmpty() && op.peek() != '(') {
+        postFix.add(op.pop()!);
       }
       op.pop();
     }
 
     //* case 3: lower or equal precedence
-    else if (precedence[ch]! <= precedence[op.peek()]!) {
-      // cout << "in case 3" << endl;
+    else if (op.isEmpty() || (precedence.containsKey(op.peek()!) && precedence[ch]! <= precedence[op.peek()!]!)) {
       while (!op.isEmpty() &&
-          precedence[ch]! <= precedence[op.peek()]! &&
+          precedence.containsKey(op.peek()!) &&
+          precedence[ch]! <= precedence[op.peek()!]! &&
           op.peek() != '(') {
-        String temp = '${op.peek()}';
-        postFix.add(temp);
-
-        op.pop();
+        postFix.add(op.pop()!);
       }
       op.push(ch);
     }
@@ -90,10 +80,7 @@ List<String> getPostFix(String expression) {
   }
 
   while (!op.isEmpty()) {
-    String temp = '${op.peek()}';
-    postFix.add(temp);
-
-    op.pop();
+    postFix.add(op.pop()!);
   }
 
   return postFix;
@@ -128,11 +115,17 @@ void solve(custom_stack.Stack<double> s, String optr) {
 double getResult(String expression) {
   String tempExp = expression;
 
+  print('expression -> $tempExp');
+
   //* add * where it is not present
-  addAsterisk(tempExp);
+  tempExp = addAsterisk(tempExp);
+
+  print('modified -> $tempExp');
 
   //* convert into postFix
   List<String> postFix = getPostFix(tempExp);
+
+  print('postfix -> $postFix');
 
   var s = custom_stack.Stack<double>();
 
@@ -144,5 +137,7 @@ double getResult(String expression) {
       s.push(double.parse(op));
     }
   }
+  print('result -> ${s.peek()}');
+
   return s.peek()!;
 }

@@ -41,6 +41,7 @@ class _MainScreenState extends State<MainScreen> {
     void calculate() {
       setState(() {
         result = getResult(inputOperation).toString();
+        print(result);
       });
     }
 
@@ -59,7 +60,7 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const SizedBox(height: 35),
-          ResultScreen(inputOperation),
+          ResultScreen(inputOperation, result),
           const Divider(
             color: Colors.blueGrey,
             indent: 10,

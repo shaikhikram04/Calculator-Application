@@ -1,5 +1,5 @@
 class Stack<T> {
-  List<T> _stack = [];
+  final List<T> _stack = [];
 
   // Push element onto the stack
   void push(T element) {

@@ -1,9 +1,11 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen(this.expression, {super.key});
+  const ResultScreen(this.expression, this.result, {super.key});
 
   final String expression;
+  final String result;
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +16,19 @@ class ResultScreen extends StatelessWidget {
       ),
       height: 300,
       width: 400,
-      child: Center(
-          child: Text(
-        expression,
-        style: const TextStyle(color: Colors.white, fontSize: 50),
-      )),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Text(
+            expression,
+            style: const TextStyle(color: Colors.white, fontSize: 40),
+          ),
+          Text(
+            result,
+            style: const TextStyle(color: Colors.white, fontSize: 50),
+          )
+        ],
+      ),
     );
   }
 }
