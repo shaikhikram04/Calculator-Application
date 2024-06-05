@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
@@ -17,15 +16,25 @@ class ResultScreen extends StatelessWidget {
       height: 300,
       width: 400,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Text(
-            expression,
-            style: const TextStyle(color: Colors.white, fontSize: 40),
+          Row(
+            children: [
+              Text(
+                expression,
+                style: const TextStyle(color: Colors.white, fontSize: 50),
+              ),
+            ],
           ),
-          Text(
-            result,
-            style: const TextStyle(color: Colors.white, fontSize: 50),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Text(
+                result,
+                style: const TextStyle(color: Colors.white, fontSize: 80),
+              ),
+            ],
           )
         ],
       ),

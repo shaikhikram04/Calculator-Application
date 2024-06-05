@@ -8,10 +8,8 @@ bool isDigit(String str) {
 }
 
 String addAsterisk(String expression) {
-  print('start addAsterisk');
   String temp = '';
   for (int i = 0; i < expression.length; i++) {
-    print('on $i');
     if (i > 0 && expression[i] == '(' && isDigit(expression[i - 1])) {
       temp += '*';
     } else if (i > 0 && expression[i - 1] == ')' && isDigit(expression[i])) {
@@ -20,7 +18,6 @@ String addAsterisk(String expression) {
     temp += expression[i];
   }
 
-  print('end addAsterisk');
   return temp;
 }
 
@@ -61,7 +58,9 @@ List<String> getPostFix(String expression) {
     }
 
     //* case 3: lower or equal precedence
-    else if (op.isEmpty() || (precedence.containsKey(op.peek()!) && precedence[ch]! <= precedence[op.peek()!]!)) {
+    else if (op.isEmpty() ||
+        (precedence.containsKey(op.peek()!) &&
+            precedence[ch]! <= precedence[op.peek()!]!)) {
       while (!op.isEmpty() &&
           precedence.containsKey(op.peek()!) &&
           precedence[ch]! <= precedence[op.peek()!]! &&
@@ -115,17 +114,14 @@ void solve(custom_stack.Stack<double> s, String optr) {
 double getResult(String expression) {
   String tempExp = expression;
 
-  print('expression -> $tempExp');
 
   //* add * where it is not present
   tempExp = addAsterisk(tempExp);
 
-  print('modified -> $tempExp');
 
   //* convert into postFix
   List<String> postFix = getPostFix(tempExp);
 
-  print('postfix -> $postFix');
 
   var s = custom_stack.Stack<double>();
 
@@ -137,7 +133,6 @@ double getResult(String expression) {
       s.push(double.parse(op));
     }
   }
-  print('result -> ${s.peek()}');
 
   return s.peek()!;
 }

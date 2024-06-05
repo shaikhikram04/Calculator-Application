@@ -41,7 +41,6 @@ class _MainScreenState extends State<MainScreen> {
     void calculate() {
       setState(() {
         result = getResult(inputOperation).toString();
-        print(result);
       });
     }
 
