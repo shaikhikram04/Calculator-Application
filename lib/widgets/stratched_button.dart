@@ -5,11 +5,13 @@ class StratchedButton extends StatelessWidget {
       {super.key,
       required this.text,
       required this.color,
-      required this.isVertical});
+      required this.isVertical,
+      required this.onClick});
 
-  final String text;
+  final Object text;
   final Color color;
   final bool isVertical;
+  final Function() onClick;
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +21,18 @@ class StratchedButton extends StatelessWidget {
         foregroundColor: Colors.white,
         fixedSize: isVertical ? const Size(90, 180) : const Size(200, 85),
       ),
-      onPressed: () {},
+      onPressed: onClick,
       child: Center(
-          child: Text(
-        text,
-        style: const TextStyle(fontSize: 35),
-      )),
+        child: (color == Colors.amber.shade700)
+            ? Icon(
+                text as IconData,
+                size: 40,
+              )
+            : Text(
+                text as String,
+                style: const TextStyle(fontSize: 40),
+              ),
+      ),
     );
   }
 }

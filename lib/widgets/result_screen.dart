@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class ResultScreen extends StatelessWidget {
-  const ResultScreen({super.key});
+  const ResultScreen(this.expression, {super.key});
+
+  final String expression;
 
   @override
   Widget build(BuildContext context) {
@@ -12,6 +14,11 @@ class ResultScreen extends StatelessWidget {
       ),
       height: 300,
       width: 400,
+      child: Center(
+          child: Text(
+        expression,
+        style: const TextStyle(color: Colors.white, fontSize: 50),
+      )),
     );
   }
 }
