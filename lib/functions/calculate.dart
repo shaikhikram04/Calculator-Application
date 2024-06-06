@@ -28,7 +28,7 @@ List<String> getPostFix(String expression) {
     '+': 1,
     '-': 1,
     '*': 2,
-    '/': 2,
+    '÷': 2,
     '^': 3,
     '(': 4,
   };
@@ -55,6 +55,13 @@ List<String> getPostFix(String expression) {
         postFix.add(op.pop()!);
       }
       op.pop();
+    }
+
+    //* percent % case
+    else if (ch == '%') {
+      double temp = double.parse(postFix.removeLast());
+      temp /= 100;
+      postFix.add(temp.toString());
     }
 
     //* case 3: lower or equal precedence
@@ -100,7 +107,7 @@ void solve(custom_stack.Stack<double> s, String optr) {
     double temp = s.peek()! * top;
     s.pop();
     s.push(temp);
-  } else if (optr == "/") {
+  } else if (optr == "÷") {
     double temp = s.peek()! / top;
     s.pop();
     s.push(temp);
@@ -114,20 +121,17 @@ void solve(custom_stack.Stack<double> s, String optr) {
 double getResult(String expression) {
   String tempExp = expression;
 
-
   //* add * where it is not present
   tempExp = addAsterisk(tempExp);
 
-
   //* convert into postFix
   List<String> postFix = getPostFix(tempExp);
-
 
   var s = custom_stack.Stack<double>();
 
   for (int i = 0; i < postFix.length; i++) {
     String op = postFix[i];
-    if (op == "+" || op == "-" || op == "*" || op == "/" || op == "^") {
+    if (op == "+" || op == "-" || op == "*" || op == "÷" || op == "^") {
       solve(s, op);
     } else {
       s.push(double.parse(op));

@@ -122,7 +122,7 @@ class _MainScreenState extends State<MainScreen> {
                 text: CupertinoIcons.multiply,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('x');
+                  addExpression('*');
                 },
               ),
             ],
