@@ -19,7 +19,7 @@ class StratchedButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: Colors.white,
-        fixedSize: isVertical ? const Size(90, 180) : const Size(200, 85),
+        fixedSize: isVertical ? const Size(80, 170) : const Size(195, 80),
       ),
       onPressed: onClick,
       child: Center(

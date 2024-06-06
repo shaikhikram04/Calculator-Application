@@ -38,27 +38,34 @@ class _MainScreenState extends State<MainScreen> {
       });
     }
 
+    bool isOperator(String ch) {
+      return (ch == '+' ||
+          ch == '-' ||
+          ch == '*' ||
+          ch == '÷' ||
+          ch == '^' ||
+          ch == '%');
+    }
+
+    void replaceOperator(String optr) {
+      if (isOperator(inputOperation[inputOperation.length - 1])) {
+        delExpression();
+      }
+      addExpression(optr);
+    }
+
     void calculate() {
       setState(() {
-        result = getResult(inputOperation).toStringAsFixed(4);
+        result = getResult(inputOperation)!;
       });
     }
 
     return Container(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.black,
-            Colors.black12,
-          ],
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      color: const Color(0xF5000000),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          const SizedBox(height: 35),
+          const SizedBox(height: 50),
           ResultScreen(inputOperation, result),
           const Divider(
             color: Colors.blueGrey,
@@ -101,28 +108,28 @@ class _MainScreenState extends State<MainScreen> {
                 text: Icons.percent,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('%');
+                  replaceOperator('%');
                 },
               ),
               CircularButton(
                 text: Icons.keyboard_arrow_up,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('^');
+                  replaceOperator('^');
                 },
               ),
               CircularButton(
                 text: CupertinoIcons.divide,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('÷');
+                  replaceOperator('÷');
                 },
               ),
               CircularButton(
                 text: CupertinoIcons.multiply,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('*');
+                  replaceOperator('*');
                 },
               ),
             ],
@@ -155,7 +162,7 @@ class _MainScreenState extends State<MainScreen> {
                 text: CupertinoIcons.minus,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('-');
+                  replaceOperator('-');
                 },
               ),
             ],
@@ -188,7 +195,7 @@ class _MainScreenState extends State<MainScreen> {
                 text: CupertinoIcons.add,
                 btnColor: operatorBtnColor,
                 onClick: () {
-                  addExpression('+');
+                  replaceOperator('+');
                 },
               ),
             ],

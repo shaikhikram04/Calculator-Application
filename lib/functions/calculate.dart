@@ -118,7 +118,7 @@ void solve(custom_stack.Stack<double> s, String optr) {
   }
 }
 
-double getResult(String expression) {
+String? getResult(String expression) {
   String tempExp = expression;
 
   //* add * where it is not present
@@ -129,7 +129,7 @@ double getResult(String expression) {
 
   var s = custom_stack.Stack<double>();
 
-  for (int i = 0; i < postFix.length; i++) {
+  for (int i = 0; i < postFix.length && !s.isEmpty(); i++) {
     String op = postFix[i];
     if (op == "+" || op == "-" || op == "*" || op == "÷" || op == "^") {
       solve(s, op);
@@ -138,5 +138,9 @@ double getResult(String expression) {
     }
   }
 
-  return s.peek()!;
+  if (s.size() != 1) {
+    return 'Invalid Operation';
+  }
+
+  return s.peek()?.toStringAsFixed(4);
 }

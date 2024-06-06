@@ -9,8 +9,11 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    double ans = double.parse(result);
-    String compresedResult = ans.toString();
+    String compressedResult = result;
+    if (result.endsWith('I')) {
+      double ans = double.parse(result);
+      compressedResult = ans.toString();
+    }
 
     return Container(
       decoration: BoxDecoration(
@@ -45,9 +48,8 @@ class ResultScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    compresedResult,
-                    style:
-                        GoogleFonts.roboto(color: Colors.white, fontSize: 50),
+                    compressedResult,
+                    style: GoogleFonts.lato(color: Colors.white, fontSize: 50),
                     textAlign: TextAlign.right,
                   ),
                 ),
