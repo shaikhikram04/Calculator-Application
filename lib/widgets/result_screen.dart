@@ -10,7 +10,7 @@ class ResultScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     String compressedResult = result;
-    if (result.endsWith('I')) {
+    if (!result.endsWith('I')) {
       double ans = double.parse(result);
       compressedResult = ans.toString();
     }

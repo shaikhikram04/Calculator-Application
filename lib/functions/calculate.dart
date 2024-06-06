@@ -93,27 +93,22 @@ List<String> getPostFix(String expression) {
 }
 
 void solve(custom_stack.Stack<double> s, String optr) {
-  double top = s.peek()!;
-  s.pop();
+  double top = s.pop()!;
+
   if (optr == "+") {
-    double temp = s.peek()! + top;
-    s.pop();
+    double temp = s.pop()! + top;
     s.push(temp);
   } else if (optr == "-") {
-    double temp = s.peek()! - top;
-    s.pop();
+    double temp = s.pop()! - top;
     s.push(temp);
   } else if (optr == "*") {
-    double temp = s.peek()! * top;
-    s.pop();
+    double temp = s.pop()! * top;
     s.push(temp);
   } else if (optr == "÷") {
-    double temp = s.peek()! / top;
-    s.pop();
+    double temp = s.pop()! / top;
     s.push(temp);
   } else if (optr == "^") {
-    double temp = pow(s.peek()!, top).toDouble();
-    s.pop();
+    double temp = pow(s.pop()!, top).toDouble();
     s.push(temp);
   }
 }
@@ -128,8 +123,8 @@ String? getResult(String expression) {
   List<String> postFix = getPostFix(tempExp);
 
   var s = custom_stack.Stack<double>();
-
-  for (int i = 0; i < postFix.length && !s.isEmpty(); i++) {
+  s.push(double.parse(postFix[0]));
+  for (int i = 1; i < postFix.length && !s.isEmpty(); i++) {
     String op = postFix[i];
     if (op == "+" || op == "-" || op == "*" || op == "÷" || op == "^") {
       solve(s, op);
