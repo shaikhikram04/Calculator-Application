@@ -40,7 +40,7 @@ class _MainScreenState extends State<MainScreen> {
 
     void calculate() {
       setState(() {
-        result = getResult(inputOperation).toString();
+        result = getResult(inputOperation).toStringAsFixed(4);
       });
     }
 

@@ -9,6 +9,9 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double ans = double.parse(result);
+    String compresedResult = ans.toString();
+
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(21),
@@ -42,7 +45,7 @@ class ResultScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    result,
+                    compresedResult,
                     style:
                         GoogleFonts.roboto(color: Colors.white, fontSize: 50),
                     textAlign: TextAlign.right,
