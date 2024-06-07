@@ -28,14 +28,17 @@ class _MainScreenState extends State<MainScreen> {
     void clearExpression() {
       setState(() {
         inputOperation = '';
+        result = '';
       });
     }
 
     void delExpression() {
-      setState(() {
-        String temp = inputOperation.substring(0, inputOperation.length - 1);
-        inputOperation = temp;
-      });
+      if (inputOperation.isNotEmpty) {
+        setState(() {
+          inputOperation =
+              inputOperation.substring(0, inputOperation.length - 1);
+        });
+      }
     }
 
     bool isOperator(String ch) {
@@ -48,16 +51,23 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     void replaceOperator(String optr) {
-      if (isOperator(inputOperation[inputOperation.length - 1])) {
+      if (inputOperation.isNotEmpty &&
+          isOperator(inputOperation[inputOperation.length - 1])) {
         delExpression();
       }
       addExpression(optr);
     }
 
     void calculate() {
-      setState(() {
-        result = getResult(inputOperation)!;
-      });
+      try {
+        setState(() {
+          result = getResult(inputOperation) ?? 'Error';
+        });
+      } catch (e) {
+        setState(() {
+          result = 'Invalid Operation';
+        });
+      }
     }
 
     return Container(

@@ -34,6 +34,9 @@ List<String> getPostFix(String expression) {
   };
 
   int i = 0;
+
+  String firstOperandSign = '+';
+
   while (i < expression.length) {
     String ch = expression[i];
 
@@ -44,15 +47,26 @@ List<String> getPostFix(String expression) {
           (isDigit(expression[i]) || expression[i] == '.')) {
         temp += expression[i++];
       }
+      if (postFix.isEmpty) {
+        temp = firstOperandSign + temp;
+      }
       postFix.add(temp);
 
       continue;
     }
 
-    //* case 2 : close braces )
+    //* case 2: open parenthesis
+    if (ch == '(') {
+      op.push(ch);
+    }
+
+    //* case 3 : close braces )
     else if (ch == ')') {
       while (!op.isEmpty() && op.peek() != '(') {
         postFix.add(op.pop()!);
+      }
+      if (op.isEmpty()) {
+        throw const FormatException("Unmatched parentheses");
       }
       op.pop();
     }
@@ -64,22 +78,19 @@ List<String> getPostFix(String expression) {
       postFix.add(temp.toString());
     }
 
-    //* case 3: lower or equal precedence
-    else if (op.isEmpty() ||
-        (precedence.containsKey(op.peek()!) &&
-            precedence[ch]! <= precedence[op.peek()!]!)) {
-      while (!op.isEmpty() &&
-          precedence.containsKey(op.peek()!) &&
-          precedence[ch]! <= precedence[op.peek()!]! &&
-          op.peek() != '(') {
-        postFix.add(op.pop()!);
+    //* case 4: operator
+    else if (precedence.containsKey(ch)) {
+      if (postFix.isEmpty && (ch == '+' || ch == '-')) {
+        firstOperandSign = ch;
+      } else {
+        while (!op.isEmpty() &&
+            precedence.containsKey(op.peek()!) &&
+            precedence[ch]! <= precedence[op.peek()!]! &&
+            op.peek() != '(') {
+          postFix.add(op.pop()!);
+        }
+        op.push(ch);
       }
-      op.push(ch);
-    }
-
-    //* case 4 : higher precedence
-    else {
-      op.push(ch);
     }
 
     i++;
@@ -93,23 +104,19 @@ List<String> getPostFix(String expression) {
 }
 
 void solve(custom_stack.Stack<double> s, String optr) {
-  double top = s.pop()!;
+  double top1 = s.pop()!;
+  double top2 = s.pop()!;
 
   if (optr == "+") {
-    double temp = s.pop()! + top;
-    s.push(temp);
+    s.push(top2 + top1);
   } else if (optr == "-") {
-    double temp = s.pop()! - top;
-    s.push(temp);
+    s.push(top2 - top1);
   } else if (optr == "*") {
-    double temp = s.pop()! * top;
-    s.push(temp);
+    s.push(top2 * top1);
   } else if (optr == "÷") {
-    double temp = s.pop()! / top;
-    s.push(temp);
+    s.push(top2 / top1);
   } else if (optr == "^") {
-    double temp = pow(s.pop()!, top).toDouble();
-    s.push(temp);
+    s.push(pow(top2, top1).toDouble());
   }
 }
 
@@ -119,17 +126,15 @@ String? getResult(String expression) {
   //* add * where it is not present
   tempExp = addAsterisk(tempExp);
 
-  //* convert into postFix
   List<String> postFix = getPostFix(tempExp);
 
   var s = custom_stack.Stack<double>();
-  s.push(double.parse(postFix[0]));
-  for (int i = 1; i < postFix.length && !s.isEmpty(); i++) {
-    String op = postFix[i];
-    if (op == "+" || op == "-" || op == "*" || op == "÷" || op == "^") {
-      solve(s, op);
+
+  for (String token in postFix) {
+    if (['+', '-', '*', '÷', '^'].contains(token)) {
+      solve(s, token);
     } else {
-      s.push(double.parse(op));
+      s.push(double.parse(token));
     }
   }
 
