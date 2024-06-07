@@ -1,22 +1,17 @@
+import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ResultScreen extends StatefulWidget {
-  const ResultScreen(this.expression, this.result, {super.key});
+class ResultScreen extends StatelessWidget {
+  ResultScreen(this.data, {super.key});
 
-  final String expression;
-  final String result;
+  ResultData data = ResultData();
 
-  @override
-  State<ResultScreen> createState() => _ResultScreenState();
-}
-
-class _ResultScreenState extends State<ResultScreen> {
   @override
   Widget build(BuildContext context) {
-    String compressedResult = widget.result;
-    if (widget.result.isNotEmpty && !widget.result.startsWith('I')) {
-      double ans = double.parse(widget.result);
+    String compressedResult = data.result;
+    if (data.result.isNotEmpty && !data.result.startsWith('I')) {
+      double ans = double.parse(data.result);
       compressedResult = ans.toString();
     }
 
@@ -37,7 +32,7 @@ class _ResultScreenState extends State<ResultScreen> {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    widget.expression,
+                    data.expression,
                     style: GoogleFonts.lato(
                         color: Colors.white,
                         fontSize: 40,

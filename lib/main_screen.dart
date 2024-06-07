@@ -1,3 +1,4 @@
+import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:calculator_application/functions/calculate.dart';
 import 'package:calculator_application/utils/colors_util.dart';
 import 'package:calculator_application/widgets/bottom_buttons.dart';
@@ -14,29 +15,29 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  String inputOperation = '';
-  String result = '';
+  ResultData data = ResultData();
+  List<ResultData> searchHistory = [];
 
   @override
   Widget build(BuildContext context) {
     void addExpression(String input) {
       setState(() {
-        inputOperation += input;
+        data.expression += input;
       });
     }
 
     void clearExpression() {
       setState(() {
-        inputOperation = '';
-        result = '';
+        data.expression = '';
+        data.result = '';
       });
     }
 
     void delExpression() {
-      if (inputOperation.isNotEmpty) {
+      if (data.expression.isNotEmpty) {
         setState(() {
-          inputOperation =
-              inputOperation.substring(0, inputOperation.length - 1);
+          data.expression =
+              data.expression.substring(0, data.expression.length - 1);
         });
       }
     }
@@ -51,8 +52,8 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     void replaceOperator(String optr) {
-      if (inputOperation.isNotEmpty &&
-          isOperator(inputOperation[inputOperation.length - 1])) {
+      if (data.expression.isNotEmpty &&
+          isOperator(data.expression[data.expression.length - 1])) {
         delExpression();
       }
       addExpression(optr);
@@ -60,7 +61,8 @@ class _MainScreenState extends State<MainScreen> {
 
     void calculate() {
       setState(() {
-        result = getResult(inputOperation)!;
+        data.result = getResult(data.expression)!;
+        searchHistory.add(data);
       });
     }
 
@@ -70,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           const SizedBox(height: 50),
-          ResultScreen(inputOperation, result),
+          ResultScreen(data),
           const Divider(
             color: Colors.blueGrey,
             indent: 10,
