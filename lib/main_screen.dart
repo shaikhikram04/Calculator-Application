@@ -59,15 +59,9 @@ class _MainScreenState extends State<MainScreen> {
     }
 
     void calculate() {
-      try {
-        setState(() {
-          result = getResult(inputOperation) ?? 'Error';
-        });
-      } catch (e) {
-        setState(() {
-          result = 'Invalid Operation';
-        });
-      }
+      setState(() {
+        result = getResult(inputOperation)!;
+      });
     }
 
     return Container(

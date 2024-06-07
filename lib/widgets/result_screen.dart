@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends StatefulWidget {
   const ResultScreen(this.expression, this.result, {super.key});
 
   final String expression;
   final String result;
 
   @override
+  State<ResultScreen> createState() => _ResultScreenState();
+}
+
+class _ResultScreenState extends State<ResultScreen> {
+  @override
   Widget build(BuildContext context) {
-    String compressedResult = result;
-    if (result.isNotEmpty && !result.startsWith('I')) {
-      double ans = double.parse(result);
+    String compressedResult = widget.result;
+    if (widget.result.isNotEmpty && !widget.result.startsWith('I')) {
+      double ans = double.parse(widget.result);
       compressedResult = ans.toString();
     }
 
@@ -32,7 +37,7 @@ class ResultScreen extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    expression,
+                    widget.expression,
                     style: GoogleFonts.lato(
                         color: Colors.white,
                         fontSize: 40,

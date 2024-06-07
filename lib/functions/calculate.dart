@@ -123,10 +123,20 @@ void solve(custom_stack.Stack<double> s, String optr) {
 String? getResult(String expression) {
   String tempExp = expression;
 
+  print('expression -> $expression');
+
   //* add * where it is not present
   tempExp = addAsterisk(tempExp);
 
+  print('adding Asterisk -> $tempExp');
+
   List<String> postFix = getPostFix(tempExp);
+
+  print('postfix -> $postFix');
+
+  if (postFix.contains('(')) {
+    return 'Invalid Operation';
+  }
 
   var s = custom_stack.Stack<double>();
 
