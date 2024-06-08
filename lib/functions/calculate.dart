@@ -65,9 +65,6 @@ List<String> getPostFix(String expression) {
       while (!op.isEmpty() && op.peek() != '(') {
         postFix.add(op.pop()!);
       }
-      if (op.isEmpty()) {
-        throw const FormatException("Unmatched parentheses");
-      }
       op.pop();
     }
 
