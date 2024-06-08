@@ -66,152 +66,154 @@ class _MainScreenState extends State<MainScreen> {
       });
     }
 
-    return Container(
-      color: const Color(0xF5000000),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const SizedBox(height: 50),
-          ResultScreen(data),
-          const Divider(
-            color: Colors.blueGrey,
-            indent: 10,
-            endIndent: 10,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircularButton(
-                text: 'C',
-                btnColor: otherBtnColor,
-                onClick: clearExpression,
-              ),
-              CircularButton(
-                text: 'Del',
-                btnColor: otherBtnColor,
-                onClick: delExpression,
-              ),
-              CircularButton(
-                text: '(',
-                btnColor: otherBtnColor,
-                onClick: () {
-                  addExpression('(');
-                },
-              ),
-              CircularButton(
-                text: ')',
-                btnColor: otherBtnColor,
-                onClick: () {
-                  addExpression(')');
-                },
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircularButton(
-                text: Icons.percent,
-                btnColor: operatorBtnColor,
-                onClick: () {
-                  replaceOperator('%');
-                },
-              ),
-              CircularButton(
-                text: Icons.keyboard_arrow_up,
-                btnColor: operatorBtnColor,
-                onClick: () {
-                  replaceOperator('^');
-                },
-              ),
-              CircularButton(
-                text: CupertinoIcons.divide,
-                btnColor: operatorBtnColor,
-                onClick: () {
-                  replaceOperator('÷');
-                },
-              ),
-              CircularButton(
-                text: CupertinoIcons.multiply,
-                btnColor: operatorBtnColor,
-                onClick: () {
-                  replaceOperator('*');
-                },
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircularButton(
-                text: '7',
-                btnColor: numberedBtnColor,
-                onClick: () {
-                  addExpression('7');
-                },
-              ),
-              CircularButton(
-                text: '8',
-                btnColor: numberedBtnColor,
-                onClick: () {
-                  addExpression('8');
-                },
-              ),
-              CircularButton(
-                text: '9',
-                btnColor: numberedBtnColor,
-                onClick: () {
-                  addExpression('9');
-                },
-              ),
-              CircularButton(
-                text: CupertinoIcons.minus,
-                btnColor: operatorBtnColor,
-                onClick: () {
-                  replaceOperator('-');
-                },
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-            children: [
-              CircularButton(
-                text: '4',
-                btnColor: numberedBtnColor,
-                onClick: () {
-                  addExpression('4');
-                },
-              ),
-              CircularButton(
-                text: '5',
-                btnColor: numberedBtnColor,
-                onClick: () {
-                  addExpression('5');
-                },
-              ),
-              CircularButton(
-                text: '6',
-                btnColor: numberedBtnColor,
-                onClick: () {
-                  addExpression('6');
-                },
-              ),
-              CircularButton(
-                text: CupertinoIcons.add,
-                btnColor: operatorBtnColor,
-                onClick: () {
-                  replaceOperator('+');
-                },
-              ),
-            ],
-          ),
-          BottomButtons(
-            addExpression,
-            calculate,
-          ),
-          const SizedBox(height: 10),
-        ],
+    return Center(
+      child: SizedBox(
+        width: 420,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            const SizedBox(height: 50),
+            ResultScreen(data),
+            const Divider(
+              color: Colors.blueGrey,
+              indent: 10,
+              endIndent: 10,
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircularButton(
+                  text: 'C',
+                  btnColor: otherBtnColor,
+                  onClick: clearExpression,
+                ),
+                CircularButton(
+                  text: 'Del',
+                  btnColor: otherBtnColor,
+                  onClick: delExpression,
+                ),
+                CircularButton(
+                  text: '(',
+                  btnColor: otherBtnColor,
+                  onClick: () {
+                    addExpression('(');
+                  },
+                ),
+                CircularButton(
+                  text: ')',
+                  btnColor: otherBtnColor,
+                  onClick: () {
+                    addExpression(')');
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircularButton(
+                  text: Icons.percent,
+                  btnColor: operatorBtnColor,
+                  onClick: () {
+                    replaceOperator('%');
+                  },
+                ),
+                CircularButton(
+                  text: Icons.keyboard_arrow_up,
+                  btnColor: operatorBtnColor,
+                  onClick: () {
+                    replaceOperator('^');
+                  },
+                ),
+                CircularButton(
+                  text: CupertinoIcons.divide,
+                  btnColor: operatorBtnColor,
+                  onClick: () {
+                    replaceOperator('÷');
+                  },
+                ),
+                CircularButton(
+                  text: CupertinoIcons.multiply,
+                  btnColor: operatorBtnColor,
+                  onClick: () {
+                    replaceOperator('*');
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircularButton(
+                  text: '7',
+                  btnColor: numberedBtnColor,
+                  onClick: () {
+                    addExpression('7');
+                  },
+                ),
+                CircularButton(
+                  text: '8',
+                  btnColor: numberedBtnColor,
+                  onClick: () {
+                    addExpression('8');
+                  },
+                ),
+                CircularButton(
+                  text: '9',
+                  btnColor: numberedBtnColor,
+                  onClick: () {
+                    addExpression('9');
+                  },
+                ),
+                CircularButton(
+                  text: CupertinoIcons.minus,
+                  btnColor: operatorBtnColor,
+                  onClick: () {
+                    replaceOperator('-');
+                  },
+                ),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                CircularButton(
+                  text: '4',
+                  btnColor: numberedBtnColor,
+                  onClick: () {
+                    addExpression('4');
+                  },
+                ),
+                CircularButton(
+                  text: '5',
+                  btnColor: numberedBtnColor,
+                  onClick: () {
+                    addExpression('5');
+                  },
+                ),
+                CircularButton(
+                  text: '6',
+                  btnColor: numberedBtnColor,
+                  onClick: () {
+                    addExpression('6');
+                  },
+                ),
+                CircularButton(
+                  text: CupertinoIcons.add,
+                  btnColor: operatorBtnColor,
+                  onClick: () {
+                    replaceOperator('+');
+                  },
+                ),
+              ],
+            ),
+            BottomButtons(
+              addExpression,
+              calculate,
+            ),
+            const SizedBox(height: 10),
+          ],
+        ),
       ),
     );
   }

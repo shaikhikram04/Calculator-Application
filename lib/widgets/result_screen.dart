@@ -1,6 +1,6 @@
 import 'package:calculator_application/custom_data_structure/result_data.dart';
+import 'package:calculator_application/widgets/result_text.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
@@ -21,7 +21,7 @@ class ResultScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(21),
         color: const Color.fromARGB(255, 40, 53, 59),
       ),
-      height: 300,
+      height: 290,
       width: 400,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -29,32 +29,18 @@ class ResultScreen extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    data.expression,
-                    style: GoogleFonts.lato(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300),
-                  ),
-                ),
-              ),
+              ResultText(
+                  text: data.expression, size: 40, weight: FontWeight.w300)
             ],
           ),
           Row(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    compressedResult,
-                    style: GoogleFonts.lato(color: Colors.white, fontSize: 50),
-                    textAlign: TextAlign.right,
-                  ),
-                ),
-              ),
+              ResultText(
+                text: compressedResult,
+                size: 50,
+                weight: FontWeight.normal,
+                textAlign: TextAlign.right,
+              )
             ],
           )
         ],
