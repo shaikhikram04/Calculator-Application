@@ -17,7 +17,7 @@ class CircularButton extends StatelessWidget {
         foregroundColor: Colors.white,
         shape: const CircleBorder(),
         padding: const EdgeInsets.all(15),
-        fixedSize: const Size(90, 85),
+        fixedSize: const Size(90, 90),
       ),
       onPressed: onClick,
       child: (btnColor == Colors.amber.shade700)

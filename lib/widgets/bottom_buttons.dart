@@ -12,6 +12,7 @@ class BottomButtons extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Column(
           children: [
@@ -24,7 +25,7 @@ class BottomButtons extends StatelessWidget {
                     addElement('1');
                   },
                 ),
-                const SizedBox(width: 19),
+                const SizedBox(width: 20),
                 CircularButton(
                   text: '2',
                   btnColor: numberedBtnColor,
@@ -32,7 +33,7 @@ class BottomButtons extends StatelessWidget {
                     addElement('2');
                   },
                 ),
-                const SizedBox(width: 19),
+                const SizedBox(width: 20),
                 CircularButton(
                   text: '3',
                   btnColor: numberedBtnColor,
@@ -42,7 +43,7 @@ class BottomButtons extends StatelessWidget {
                 ),
               ],
             ),
-            const SizedBox(height: 7),
+            const SizedBox(height: 6),
             Row(
               children: [
                 StratchedButton(
@@ -53,7 +54,7 @@ class BottomButtons extends StatelessWidget {
                     addElement('0');
                   },
                 ),
-                const SizedBox(width: 24),
+                const SizedBox(width: 20),
                 CircularButton(
                   text: '.',
                   btnColor: numberedBtnColor,
@@ -65,7 +66,6 @@ class BottomButtons extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(width: 28),
         StratchedButton(
           color: operatorBtnColor,
           text: CupertinoIcons.equal,

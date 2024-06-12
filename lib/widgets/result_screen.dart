@@ -30,7 +30,10 @@ class ResultScreen extends StatelessWidget {
           Row(
             children: [
               ResultText(
-                  text: data.expression, size: 40, weight: FontWeight.w300)
+                text: data.expression,
+                size: 40,
+                weight: FontWeight.w300,
+              )
             ],
           ),
           Row(

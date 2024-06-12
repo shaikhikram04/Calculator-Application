@@ -115,28 +115,36 @@ class _MainScreenState extends State<MainScreen> {
                   text: Icons.percent,
                   btnColor: operatorBtnColor,
                   onClick: () {
-                    replaceOperator('%');
+                    if (data.expression.isNotEmpty) {
+                      replaceOperator('%');
+                    }
                   },
                 ),
                 CircularButton(
                   text: Icons.keyboard_arrow_up,
                   btnColor: operatorBtnColor,
                   onClick: () {
-                    replaceOperator('^');
+                    if (data.expression.isNotEmpty) {
+                      replaceOperator('^');
+                    }
                   },
                 ),
                 CircularButton(
                   text: CupertinoIcons.divide,
                   btnColor: operatorBtnColor,
                   onClick: () {
-                    replaceOperator('÷');
+                    if (data.expression.isNotEmpty) {
+                      replaceOperator('÷');
+                    }
                   },
                 ),
                 CircularButton(
                   text: CupertinoIcons.multiply,
                   btnColor: operatorBtnColor,
                   onClick: () {
-                    replaceOperator('*');
+                    if (data.expression.isNotEmpty) {
+                      replaceOperator('*');
+                    }
                   },
                 ),
               ],
