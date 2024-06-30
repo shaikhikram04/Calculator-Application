@@ -1,6 +1,8 @@
 import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:calculator_application/utils/globals.dart' as globals;
+
 
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
@@ -10,6 +12,7 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     String compressedResult = data.result;
     if (data.result.isNotEmpty && !data.result.startsWith('I')) {
       double ans = double.parse(data.result);
@@ -21,8 +24,9 @@ class ResultScreen extends StatelessWidget {
         borderRadius: BorderRadius.circular(21),
         color: const Color.fromARGB(255, 40, 53, 59),
       ),
-      height: 300,
-      width: 400,
+      height: globals.screenHeight! * 0.3,
+      width: globals.screenWidth! * 0.96,
+      margin: EdgeInsets.only(bottom: globals.screenHeight! * 0.003),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,

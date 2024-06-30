@@ -1,37 +1,35 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
+import 'package:calculator_application/utils/globals.dart' as globals;
 
 class StratchedButton extends StatelessWidget {
   const StratchedButton(
       {super.key,
       required this.text,
       required this.color,
-      required this.isVertical,
       required this.onClick});
 
-  final Object text;
+  final IconData text;
   final Color color;
-  final bool isVertical;
   final Function() onClick;
 
   @override
   Widget build(BuildContext context) {
+    double diameterOfBtn =
+        min(globals.screenWidth! * 0.19, globals.screenHeight! * 0.09);
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: color,
         foregroundColor: Colors.white,
-        fixedSize: isVertical ? const Size(80, 170) : const Size(195, 80),
+        fixedSize: Size(diameterOfBtn, globals.screenHeight! * 0.185),
       ),
       onPressed: onClick,
       child: Center(
-        child: (color == Colors.amber.shade700)
-            ? Icon(
-                text as IconData,
-                size: 40,
-              )
-            : Text(
-                text as String,
-                style: const TextStyle(fontSize: 40),
-              ),
+        child: Icon(
+          text,
+          size: diameterOfBtn * 0.5,
+        ),
       ),
     );
   }
