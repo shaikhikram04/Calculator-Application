@@ -17,16 +17,13 @@ class MainScreen extends ConsumerStatefulWidget {
 }
 
 class _MainScreenState extends ConsumerState<MainScreen> {
-  ResultData data = ResultData();
-  List<ResultData> searchHistory = [];
-
   void showHistory() {
     showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: const Color.fromARGB(245, 90, 89, 89),
       useSafeArea: true,
       context: context,
-      builder: (context) => HistoryScreen(searchHistory: searchHistory),
+      builder: (context) => const HistoryScreen(),
     );
   }
 
@@ -55,7 +52,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
           children: [
             Expanded(
               flex: 3,
-              child: ResultScreen(data),
+              child: ResultScreen(),
             ),
             const Divider(
               color: Colors.blueGrey,

@@ -3,16 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
-
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
-  ResultScreen(this.data, {super.key});
-
-  ResultData data = ResultData();
+  ResultScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-
+    var data = ResultData();
     String compressedResult = data.result;
     if (data.result.isNotEmpty && !data.result.startsWith('I')) {
       double ans = double.parse(data.result);
