@@ -1,4 +1,3 @@
-import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:flutter/material.dart';
 
 class HistoryScreen extends StatelessWidget {

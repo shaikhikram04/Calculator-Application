@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:calculator_application/functions/buttons_list.dart';
 import 'package:calculator_application/screens/history_screen.dart';
 import 'package:calculator_application/widgets/buttons/buttons.dart';
@@ -50,7 +49,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            Expanded(
+            const Expanded(
               flex: 3,
               child: ResultScreen(),
             ),

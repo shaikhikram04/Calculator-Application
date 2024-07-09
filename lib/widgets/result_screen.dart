@@ -5,7 +5,7 @@ import 'package:calculator_application/utils/globals.dart' as globals;
 
 // ignore: must_be_immutable
 class ResultScreen extends StatelessWidget {
-  ResultScreen({super.key});
+  const ResultScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
