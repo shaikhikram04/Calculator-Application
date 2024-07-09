@@ -1,9 +1,12 @@
 import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:calculator_application/functions/calculate.dart';
+import 'package:calculator_application/providers/search_history_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ResultDataNotifier extends StateNotifier<ResultData> {
-  ResultDataNotifier() : super(ResultData());
+  ResultDataNotifier(this.ref) : super(ResultData());
+
+  final StateNotifierProviderRef<ResultDataNotifier, ResultData> ref;
 
   bool isOperator(String ch) {
     return (ch == '+' ||
@@ -38,12 +41,12 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   }
 
   void calculate() {
-      state.result = getResult(state.expression)!;
-      // searchHistory.add(data);
+    state.result = getResult(state.expression)!;
+    ref.read(searchHistoryProvider.notifier).addData(state);
   }
 }
 
 final resultDataProvider =
     StateNotifierProvider<ResultDataNotifier, ResultData>(
-  (ref) => ResultDataNotifier(),
+  (ref) => ResultDataNotifier(ref),
 );
