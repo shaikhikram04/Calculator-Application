@@ -2,7 +2,6 @@ import 'package:calculator_application/providers/result_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
