@@ -8,15 +8,10 @@ import 'package:calculator_application/widgets/buttons/circular_button.dart';
 import 'package:calculator_application/widgets/result_screen.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
-class MainScreen extends ConsumerStatefulWidget {
+class MainScreen extends ConsumerWidget {
   const MainScreen({super.key});
 
-  @override
-  ConsumerState<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends ConsumerState<MainScreen> {
-  void showHistory() {
+  void showHistory(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
       backgroundColor: const Color.fromARGB(245, 90, 89, 89),
@@ -27,7 +22,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     List<CircularButton> upperButtons = getUpperButtons(ref);
     List<Widget> lowerButtons = getLowerButtons(ref);
 
@@ -36,11 +31,11 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         backgroundColor: const Color(0xF5000000),
         actions: [
           IconButton(
-            onPressed: showHistory,
+            onPressed: () => showHistory(context),
             icon: Icon(
               Icons.history,
               color: Colors.white,
-              size: globals.screenWidth! * 0.095,
+              size: globals.screenWidth! * 0.09 ,
             ),
           )
         ],

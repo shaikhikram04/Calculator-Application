@@ -1,4 +1,5 @@
 class ResultData {
-  String expression = '';
-  String result = '';
+  ResultData(this.expression, this.result);
+  final String expression;
+  final String result;
 }

@@ -4,7 +4,7 @@ import 'package:calculator_application/providers/search_history_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ResultDataNotifier extends StateNotifier<ResultData> {
-  ResultDataNotifier(this.ref) : super(ResultData());
+  ResultDataNotifier(this.ref) : super(ResultData('', ''));
 
   final StateNotifierProviderRef<ResultDataNotifier, ResultData> ref;
 
@@ -18,17 +18,22 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   }
 
   void addExpression(String input) {
-    state.expression = state.expression + input;
+    state = ResultData(
+      state.expression + input,
+      state.result,
+    );
   }
 
   void clearExpression() {
-    state = ResultData();
+    state = ResultData('', '');
   }
 
   void delExpression() {
     if (state.expression.isNotEmpty) {
-      state.expression =
-          state.expression.substring(0, state.expression.length - 1);
+      state = ResultData(
+        state.expression.substring(0, state.expression.length - 1),
+        state.result,
+      );
     }
   }
 
@@ -41,7 +46,7 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   }
 
   void calculate() {
-    state.result = getResult(state.expression)!;
+    state = ResultData(state.expression, getResult(state.expression)!);
     ref.read(searchHistoryProvider.notifier).addData(state);
   }
 }

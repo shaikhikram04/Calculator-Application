@@ -1,15 +1,18 @@
-import 'package:calculator_application/custom_data_structure/result_data.dart';
+import 'package:calculator_application/providers/result_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
 // ignore: must_be_immutable
-class ResultScreen extends StatelessWidget {
+class ResultScreen extends ConsumerWidget {
   const ResultScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    var data = ResultData();
+  Widget build(BuildContext context, WidgetRef ref) {
+    var data = ref.watch(resultDataProvider);
     String compressedResult = data.result;
     if (data.result.isNotEmpty && !data.result.startsWith('I')) {
       double ans = double.parse(data.result);
