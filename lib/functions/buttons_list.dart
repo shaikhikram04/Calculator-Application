@@ -1,122 +1,94 @@
+import 'package:calculator_application/providers/result_data_provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:calculator_application/utils/colors_util.dart';
 import 'package:calculator_application/widgets/buttons/circular_button.dart';
 import 'package:calculator_application/widgets/buttons/stratched_button.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 
-List<CircularButton> getUpperButtons({
-  required void Function() onClear,
-  required void Function() onDelete,
-  required void Function(String expn) addExpression,
-  required void Function(String optr) replaceOperator,
-}) {
+List<CircularButton> getUpperButtons(WidgetRef ref) {
   List<CircularButton> upperButtons = [
     CircularButton(
       label: 'C',
       btnColor: otherBtnColor,
-      onClick: onClear,
+      onClick: ref.read(resultDataProvider.notifier).clearExpression,
     ),
     CircularButton(
       label: 'Del',
       btnColor: otherBtnColor,
-      onClick: onDelete,
+      onClick: ref.read(resultDataProvider.notifier).delExpression,
     ),
     CircularButton(
       label: '(',
       btnColor: otherBtnColor,
       onClick: () {
-        addExpression('(');
+        ref.read(resultDataProvider.notifier).addExpression('(');
       },
     ),
     CircularButton(
       label: ')',
       btnColor: otherBtnColor,
       onClick: () {
-        addExpression(')');
+        ref.read(resultDataProvider.notifier).addExpression(')');
       },
     ),
     CircularButton(
       label: Icons.percent,
       btnColor: operatorBtnColor,
       onClick: () {
-        replaceOperator('%');
+        ref.read(resultDataProvider.notifier).replaceOperator('%');
       },
     ),
     CircularButton(
       label: Icons.keyboard_arrow_up,
       btnColor: operatorBtnColor,
       onClick: () {
-        replaceOperator('^');
+        ref.read(resultDataProvider.notifier).replaceOperator('^');
       },
     ),
     CircularButton(
       label: CupertinoIcons.divide,
       btnColor: operatorBtnColor,
       onClick: () {
-        replaceOperator('÷');
+        ref.read(resultDataProvider.notifier).replaceOperator('÷');
       },
     ),
     CircularButton(
       label: CupertinoIcons.multiply,
       btnColor: operatorBtnColor,
       onClick: () {
-        replaceOperator('*');
+        ref.read(resultDataProvider.notifier).replaceOperator('*');
       },
     ),
-    CircularButton(
-      label: '7',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('7');
-      },
-    ),
-    CircularButton(
-      label: '8',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('8');
-      },
-    ),
-    CircularButton(
-      label: '9',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('9');
-      },
-    ),
+    for (int i = 7; i <= 9; i++)
+      CircularButton(
+        label: '$i',
+        btnColor: numberedBtnColor,
+        onClick: () {
+          ref.read(resultDataProvider.notifier).addExpression('$i');
+        },
+      ),
     CircularButton(
       label: CupertinoIcons.minus,
       btnColor: operatorBtnColor,
       onClick: () {
-        replaceOperator('-');
+        ref.read(resultDataProvider.notifier).replaceOperator('-');
       },
     ),
-    CircularButton(
-      label: '4',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('4');
-      },
-    ),
-    CircularButton(
-      label: '5',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('5');
-      },
-    ),
-    CircularButton(
-      label: '6',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('6');
-      },
-    ),
+    for (int i = 4; i <= 6; i++)
+      CircularButton(
+        label: '$i',
+        btnColor: numberedBtnColor,
+        onClick: () {
+          ref.read(resultDataProvider.notifier).addExpression('$i');
+        },
+      ),
     CircularButton(
       label: CupertinoIcons.add,
       btnColor: operatorBtnColor,
       onClick: () {
-        replaceOperator('+');
+        ref.read(resultDataProvider.notifier).replaceOperator('+');
       },
     ),
   ];
@@ -124,32 +96,16 @@ List<CircularButton> getUpperButtons({
   return upperButtons;
 }
 
-List<Widget> getLowerButtons({
-  required void Function(String expn) addExpression,
-  required void Function() calculate,
-}) {
+List<Widget> getLowerButtons(WidgetRef ref) {
   List<Widget> lowerButtons = [
-    CircularButton(
-      label: '1',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('1');
-      },
-    ),
-    CircularButton(
-      label: '2',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('2');
-      },
-    ),
-    CircularButton(
-      label: '3',
-      btnColor: numberedBtnColor,
-      onClick: () {
-        addExpression('3');
-      },
-    ),
+    for (int i = 1; i <= 3; i++)
+      CircularButton(
+        label: '$i',
+        btnColor: numberedBtnColor,
+        onClick: () {
+          ref.read(resultDataProvider.notifier).addExpression('$i');
+        },
+      ),
     CircularButton(
       label: const AssetImage('assets/images/negate_icon.png'),
       btnColor: numberedBtnColor,
@@ -159,20 +115,20 @@ List<Widget> getLowerButtons({
       label: '0',
       btnColor: numberedBtnColor,
       onClick: () {
-        addExpression('0');
+        ref.read(resultDataProvider.notifier).addExpression('0');
       },
     ),
     CircularButton(
       label: '.',
       btnColor: numberedBtnColor,
       onClick: () {
-        addExpression('.');
+        ref.read(resultDataProvider.notifier).addExpression('.');
       },
     ),
     StratchedButton(
       color: operatorBtnColor,
       text: CupertinoIcons.equal,
-      onClick: calculate,
+      onClick: ref.read(resultDataProvider.notifier).calculate,
     )
   ];
 

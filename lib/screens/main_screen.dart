@@ -1,21 +1,22 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:calculator_application/custom_data_structure/result_data.dart';
 import 'package:calculator_application/functions/buttons_list.dart';
-import 'package:calculator_application/functions/calculate.dart';
 import 'package:calculator_application/screens/history_screen.dart';
 import 'package:calculator_application/widgets/buttons/buttons.dart';
 import 'package:calculator_application/widgets/buttons/circular_button.dart';
 import 'package:calculator_application/widgets/result_screen.dart';
-import 'package:flutter/material.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   ResultData data = ResultData();
   List<ResultData> searchHistory = [];
 
@@ -29,64 +30,10 @@ class _MainScreenState extends State<MainScreen> {
     );
   }
 
-  bool isOperator(String ch) {
-    return (ch == '+' ||
-        ch == '-' ||
-        ch == '*' ||
-        ch == '÷' ||
-        ch == '^' ||
-        ch == '%');
-  }
-
-  void addExpression(String input) {
-    setState(() {
-      data.expression += input;
-    });
-  }
-
-  void clearExpression() {
-    setState(() {
-      data.expression = '';
-      data.result = '';
-    });
-  }
-
-  void delExpression() {
-    if (data.expression.isNotEmpty) {
-      setState(() {
-        data.expression =
-            data.expression.substring(0, data.expression.length - 1);
-      });
-    }
-  }
-
-  void replaceOperator(String optr) {
-    if (data.expression.isNotEmpty &&
-        isOperator(data.expression[data.expression.length - 1])) {
-      delExpression();
-    }
-    addExpression(optr);
-  }
-
-  void calculate() {
-    setState(() {
-      data.result = getResult(data.expression)!;
-      searchHistory.add(data);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    List<CircularButton> upperButtons = getUpperButtons(
-      onClear: clearExpression,
-      onDelete: delExpression,
-      addExpression: addExpression,
-      replaceOperator: replaceOperator,
-    );
-    List<Widget> lowerButtons = getLowerButtons(
-      addExpression: addExpression,
-      calculate: calculate,
-    );
+    List<CircularButton> upperButtons = getUpperButtons(ref);
+    List<Widget> lowerButtons = getLowerButtons(ref);
 
     return Scaffold(
       appBar: AppBar(
