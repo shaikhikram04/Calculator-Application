@@ -33,29 +33,29 @@ List<CircularButton> getUpperButtons(WidgetRef ref) {
         ref.read(resultDataProvider.notifier).addExpression(')');
       },
     ),
-    CircularButton(
-      label: Icons.percent,
+    CircularButton.icon(
+      icon: Icons.percent,
       btnColor: operatorBtnColor,
       onClick: () {
         ref.read(resultDataProvider.notifier).replaceOperator('%');
       },
     ),
-    CircularButton(
-      label: Icons.keyboard_arrow_up,
+    CircularButton.icon(
+      icon: Icons.keyboard_arrow_up,
       btnColor: operatorBtnColor,
       onClick: () {
         ref.read(resultDataProvider.notifier).replaceOperator('^');
       },
     ),
-    CircularButton(
-      label: CupertinoIcons.divide,
+    CircularButton.icon(
+      icon: CupertinoIcons.divide,
       btnColor: operatorBtnColor,
       onClick: () {
         ref.read(resultDataProvider.notifier).replaceOperator('÷');
       },
     ),
-    CircularButton(
-      label: CupertinoIcons.multiply,
+    CircularButton.icon(
+      icon: CupertinoIcons.multiply,
       btnColor: operatorBtnColor,
       onClick: () {
         ref.read(resultDataProvider.notifier).replaceOperator('x');
@@ -69,8 +69,8 @@ List<CircularButton> getUpperButtons(WidgetRef ref) {
           ref.read(resultDataProvider.notifier).addExpression('$i');
         },
       ),
-    CircularButton(
-      label: CupertinoIcons.minus,
+    CircularButton.icon(
+      icon: CupertinoIcons.minus,
       btnColor: operatorBtnColor,
       onClick: () {
         ref.read(resultDataProvider.notifier).replaceOperator('-');
@@ -84,8 +84,8 @@ List<CircularButton> getUpperButtons(WidgetRef ref) {
           ref.read(resultDataProvider.notifier).addExpression('$i');
         },
       ),
-    CircularButton(
-      label: CupertinoIcons.add,
+    CircularButton.icon(
+      icon: CupertinoIcons.add,
       btnColor: operatorBtnColor,
       onClick: () {
         ref.read(resultDataProvider.notifier).replaceOperator('+');
@@ -106,8 +106,8 @@ List<Widget> getLowerButtons(WidgetRef ref) {
           ref.read(resultDataProvider.notifier).addExpression('$i');
         },
       ),
-    CircularButton(
-      label: const AssetImage('assets/images/negate_icon.png'),
+    CircularButton.image(
+      image: const AssetImage('assets/images/negate_icon.png'),
       btnColor: numberedBtnColor,
       onClick: () {},
     ),
