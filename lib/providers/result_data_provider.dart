@@ -8,15 +8,6 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
 
   final StateNotifierProviderRef<ResultDataNotifier, ResultData> ref;
 
-  bool isOperator(String ch) {
-    return (ch == '+' ||
-        ch == '-' ||
-        ch == 'x' ||
-        ch == '÷' ||
-        ch == '^' ||
-        ch == '%');
-  }
-
   void addExpression(String input) {
     state = ResultData(
       state.expression + input,

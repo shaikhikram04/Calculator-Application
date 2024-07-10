@@ -7,6 +7,15 @@ bool isDigit(String str) {
   return str.length == 1 && str.compareTo('0') >= 0 && str.compareTo('9') <= 0;
 }
 
+bool isOperator(String ch) {
+  return (ch == '+' ||
+      ch == '-' ||
+      ch == 'x' ||
+      ch == '÷' ||
+      ch == '^' ||
+      ch == '%');
+}
+
 String addAsterisk(String expression) {
   String temp = '';
   for (int i = 0; i < expression.length; i++) {
@@ -66,7 +75,8 @@ List<String> getPostFix(String expression) {
         postFix.add(op.pop()!);
       }
       if (op.isEmpty()) {
-        throw const FormatException("Unmatched parentheses");
+        postFix.add(')');
+        return postFix;
       }
       op.pop();
     }
@@ -103,6 +113,29 @@ List<String> getPostFix(String expression) {
   return postFix;
 }
 
+bool isInvalidOperaition(List<String> postFix) {
+  if (postFix.contains('(') || postFix.contains(')')) {
+    return true;
+  }
+
+  int noOfOperator = 0;
+  int noOfNumber = 0;
+
+  for (final element in postFix) {
+    if (isOperator(element)) {
+      noOfOperator++;
+    } else {
+      noOfNumber++;
+    }
+  }
+
+  if (noOfNumber != noOfOperator + 1) {
+    return true;
+  }
+
+  return false;
+}
+
 void solve(custom_stack.Stack<double> s, String optr) {
   double top1 = s.pop()!;
   double top2 = s.pop()!;
@@ -126,24 +159,22 @@ String? getResult(String expression) {
   //* add * where it is not present
   tempExp = addAsterisk(tempExp);
 
+  //* get postfix of expression
   List<String> postFix = getPostFix(tempExp);
 
-  if (postFix.contains('(')) {
+  //* Check for invalid operation
+  if (isInvalidOperaition(postFix)) {
     return 'Invalid Operation';
   }
 
   var s = custom_stack.Stack<double>();
 
   for (String token in postFix) {
-    if (['+', '-', 'x', '÷', '^'].contains(token)) {
+    if (isOperator(token)) {
       solve(s, token);
     } else {
       s.push(double.parse(token));
     }
-  }
-
-  if (s.size() != 1) {
-    return 'Invalid Operation';
   }
 
   return s.peek()?.toStringAsFixed(4);
