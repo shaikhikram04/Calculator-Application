@@ -127,7 +127,7 @@ List<Widget> getLowerButtons(WidgetRef ref) {
     ),
     StratchedButton(
       color: operatorBtnColor,
-      text: CupertinoIcons.equal,
+      icon: CupertinoIcons.equal,
       onClick: ref.read(resultDataProvider.notifier).calculate,
     )
   ];

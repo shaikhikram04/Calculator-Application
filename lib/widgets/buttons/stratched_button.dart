@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
 class StratchedButton extends StatelessWidget {
-  const StratchedButton(
-      {super.key,
-      required this.text,
-      required this.color,
-      required this.onClick});
+  const StratchedButton({
+    super.key,
+    required this.icon,
+    required this.color,
+    required this.onClick,
+  });
 
-  final IconData text;
+  final IconData icon;
   final Color color;
   final Function() onClick;
 
@@ -27,7 +28,7 @@ class StratchedButton extends StatelessWidget {
       onPressed: onClick,
       child: Center(
         child: Icon(
-          text,
+          icon,
           size: diameterOfBtn * 0.5,
         ),
       ),
