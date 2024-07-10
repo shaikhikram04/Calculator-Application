@@ -14,7 +14,7 @@ class MainScreen extends ConsumerWidget {
   void showHistory(BuildContext context) {
     showModalBottomSheet(
       isScrollControlled: true,
-      backgroundColor: const Color.fromARGB(245, 90, 89, 89),
+      backgroundColor: const Color.fromARGB(255, 90, 89, 89),
       useSafeArea: true,
       context: context,
       builder: (context) => const HistoryScreen(),
@@ -35,7 +35,7 @@ class MainScreen extends ConsumerWidget {
             icon: Icon(
               Icons.history,
               color: Colors.white,
-              size: globals.screenWidth! * 0.09 ,
+              size: globals.screenWidth! * 0.09,
             ),
           )
         ],

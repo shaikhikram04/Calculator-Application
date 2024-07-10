@@ -5,7 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
-// ignore: must_be_immutable
 class ResultScreen extends ConsumerWidget {
   const ResultScreen({super.key});
 
@@ -37,7 +36,7 @@ class ResultScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     data.expression,
-                    style: GoogleFonts.lato(
+                    style: GoogleFonts.firaCode(
                         color: Colors.white,
                         fontSize: 40,
                         fontWeight: FontWeight.w300),

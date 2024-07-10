@@ -11,9 +11,9 @@ String addAsterisk(String expression) {
   String temp = '';
   for (int i = 0; i < expression.length; i++) {
     if (i > 0 && expression[i] == '(' && isDigit(expression[i - 1])) {
-      temp += '*';
+      temp += 'x';
     } else if (i > 0 && expression[i - 1] == ')' && isDigit(expression[i])) {
-      temp += '*';
+      temp += 'x';
     }
     temp += expression[i];
   }
@@ -27,7 +27,7 @@ List<String> getPostFix(String expression) {
   Map<String, int> precedence = {
     '+': 1,
     '-': 1,
-    '*': 2,
+    'x': 2,
     '÷': 2,
     '^': 3,
     '(': 4,
@@ -107,15 +107,15 @@ void solve(custom_stack.Stack<double> s, String optr) {
   double top1 = s.pop()!;
   double top2 = s.pop()!;
 
-  if (optr == "+") {
+  if (optr == '+') {
     s.push(top2 + top1);
-  } else if (optr == "-") {
+  } else if (optr == '-') {
     s.push(top2 - top1);
-  } else if (optr == "*") {
+  } else if (optr == 'x') {
     s.push(top2 * top1);
-  } else if (optr == "÷") {
+  } else if (optr == '÷') {
     s.push(top2 / top1);
-  } else if (optr == "^") {
+  } else if (optr == '^') {
     s.push(pow(top2, top1).toDouble());
   }
 }
@@ -135,7 +135,7 @@ String? getResult(String expression) {
   var s = custom_stack.Stack<double>();
 
   for (String token in postFix) {
-    if (['+', '-', '*', '÷', '^'].contains(token)) {
+    if (['+', '-', 'x', '÷', '^'].contains(token)) {
       solve(s, token);
     } else {
       s.push(double.parse(token));

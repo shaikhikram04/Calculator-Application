@@ -58,7 +58,7 @@ List<CircularButton> getUpperButtons(WidgetRef ref) {
       label: CupertinoIcons.multiply,
       btnColor: operatorBtnColor,
       onClick: () {
-        ref.read(resultDataProvider.notifier).replaceOperator('*');
+        ref.read(resultDataProvider.notifier).replaceOperator('x');
       },
     ),
     for (int i = 7; i <= 9; i++)
