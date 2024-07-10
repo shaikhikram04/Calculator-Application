@@ -4,12 +4,33 @@ import 'package:flutter/material.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
 class CircularButton extends StatelessWidget {
-  const CircularButton(
-      {super.key,
-      required this.label,
-      required this.btnColor,
-      required this.onClick});
-  final Object label;
+  const CircularButton({
+    super.key,
+    required this.label,
+    required this.btnColor,
+    required this.onClick,
+  })  : icon = null,
+        image = null;
+
+  const CircularButton.icon({
+    super.key,
+    required this.icon,
+    required this.btnColor,
+    required this.onClick,
+  })  : label = null,
+        image = null;
+
+  const CircularButton.image({
+    super.key,
+    required this.image,
+    required this.btnColor,
+    required this.onClick,
+  })  : label = null,
+        icon = null;
+
+  final String? label;
+  final IconData? icon;
+  final ImageProvider? image;
   final Color btnColor;
   final void Function() onClick;
 
@@ -17,19 +38,19 @@ class CircularButton extends StatelessWidget {
     double diameterOfBtn =
         min(globals.screenWidth! * 0.19, globals.screenHeight! * 0.09);
 
-    if (label is IconData) {
+    if (icon != null) {
       return Icon(
-        label as IconData,
+        icon,
         size: diameterOfBtn * 0.45,
       );
-    } else if (label is String) {
+    } else if (label != null) {
       return Text(
-        label as String,
+        label!,
         style: TextStyle(fontSize: diameterOfBtn * 0.40),
       );
     } else {
       return ImageIcon(
-        label as ImageProvider,
+        image,
         size: diameterOfBtn * 0.45,
       );
     }
