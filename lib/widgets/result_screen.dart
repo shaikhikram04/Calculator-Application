@@ -11,11 +11,6 @@ class ResultScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(resultDataProvider);
-    String compressedResult = data.result;
-    if (data.result.isNotEmpty && data.result != 'Invalid Operation') {
-      double ans = double.parse(data.result);
-      compressedResult = ans.toString();
-    }
 
     return Container(
       decoration: BoxDecoration(
@@ -52,7 +47,7 @@ class ResultScreen extends ConsumerWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    compressedResult,
+                    data.result,
                     style: GoogleFonts.lato(
                       color: Colors.white,
                       fontSize: 50,

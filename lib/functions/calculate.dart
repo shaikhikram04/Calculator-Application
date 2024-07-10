@@ -153,7 +153,16 @@ void solve(custom_stack.Stack<double> s, String optr) {
   }
 }
 
-String? getResult(String expression) {
+String removeTrailingZeros(String numStr) {
+  //* Remove trailing zeros after the decimal point
+  numStr = numStr.replaceFirst(RegExp(r'0*$'), '');
+  //* Remove the decimal point if it is the last character
+  numStr = numStr.replaceFirst(RegExp(r'\.$'), '');
+
+  return numStr;
+}
+
+String getResult(String expression) {
   String tempExp = expression;
 
   //* add * where it is not present
@@ -177,5 +186,7 @@ String? getResult(String expression) {
     }
   }
 
-  return s.peek()?.toStringAsFixed(4);
+  String ans = s.peek()!.toStringAsFixed(4);
+
+  return removeTrailingZeros(ans);
 }

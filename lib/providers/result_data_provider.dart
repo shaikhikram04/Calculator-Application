@@ -37,7 +37,7 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   }
 
   void calculate() {
-    state = ResultData(state.expression, getResult(state.expression)!);
+    state = ResultData(state.expression, getResult(state.expression));
     ref.read(searchHistoryProvider.notifier).addData(state);
   }
 }
