@@ -1,8 +1,14 @@
-import 'package:calculator_application/main_screen.dart';
+import 'package:calculator_application/screens/main_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:calculator_application/utils/globals.dart' as globals;
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+var theme = ThemeData(
+  colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xE10B0B0B)),
+);
 
 void main() {
-  runApp(const Calculator());
+  runApp(const ProviderScope(child: Calculator()));
 }
 
 class Calculator extends StatelessWidget {
@@ -10,12 +16,12 @@ class Calculator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    globals.screenHeight = MediaQuery.sizeOf(context).height;
+    globals.screenWidth = MediaQuery.sizeOf(context).width;
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Color(0xF5000000),
-        body: MainScreen(),
-      ),
+      theme: theme,
+      home: const MainScreen(),
     );
   }
 }

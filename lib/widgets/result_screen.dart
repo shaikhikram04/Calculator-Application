@@ -1,49 +1,61 @@
-import 'package:calculator_application/custom_data_structure/result_data.dart';
-import 'package:calculator_application/widgets/result_text.dart';
+import 'package:calculator_application/providers/result_data_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-// ignore: must_be_immutable
-class ResultScreen extends StatelessWidget {
-  ResultScreen(this.data, {super.key});
+import 'package:google_fonts/google_fonts.dart';
+import 'package:calculator_application/utils/globals.dart' as globals;
 
-  ResultData data = ResultData();
+class ResultScreen extends ConsumerWidget {
+  const ResultScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    String compressedResult = data.result;
-    if (data.result.isNotEmpty && !data.result.startsWith('I')) {
-      double ans = double.parse(data.result);
-      compressedResult = ans.toString();
-    }
+  Widget build(BuildContext context, WidgetRef ref) {
+    var data = ref.watch(resultDataProvider);
 
     return Container(
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(21),
         color: const Color.fromARGB(255, 40, 53, 59),
       ),
-      height: 290,
-      width: 400,
+      height: globals.screenHeight! * 0.3,
+      width: globals.screenWidth! * 0.96,
+      margin: EdgeInsets.only(bottom: globals.screenHeight! * 0.003),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Row(
             children: [
-              ResultText(
-                text: data.expression,
-                size: 40,
-                weight: FontWeight.w300,
-              )
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    data.expression,
+                    style: GoogleFonts.firaCode(
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    ),
+                  ),
+                ),
+              ),
             ],
           ),
           Row(
             children: [
-              ResultText(
-                text: compressedResult,
-                size: 50,
-                weight: FontWeight.normal,
-                textAlign: TextAlign.right,
-              )
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Text(
+                    data.result,
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontSize: 50,
+                    ),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+              ),
             ],
           )
         ],
