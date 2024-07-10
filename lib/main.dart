@@ -2,9 +2,11 @@ import 'package:calculator_application/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 var theme = ThemeData(
   colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xE10B0B0B)),
+  textTheme: GoogleFonts.firaCodeTextTheme(),
 );
 
 void main() {

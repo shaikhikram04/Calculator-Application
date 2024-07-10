@@ -1,8 +1,7 @@
-import 'package:calculator_application/providers/result_data_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:google_fonts/google_fonts.dart';
+import 'package:calculator_application/providers/result_data_provider.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
 
 class ResultScreen extends ConsumerWidget {
@@ -26,17 +25,13 @@ class ResultScreen extends ConsumerWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    data.expression,
-                    style: GoogleFonts.firaCode(
-                      color: Colors.white,
-                      fontSize: 40,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  data.expression,
+                  style: Theme.of(context).textTheme.displayMedium!.copyWith(
+                        color: Colors.white,
+                      ),
                 ),
               ),
             ],
@@ -48,10 +43,9 @@ class ResultScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     data.result,
-                    style: GoogleFonts.lato(
-                      color: Colors.white,
-                      fontSize: 50,
-                    ),
+                    style: Theme.of(context).textTheme.displayLarge!.copyWith(
+                          color: Colors.white,
+                        ),
                     textAlign: TextAlign.right,
                   ),
                 ),

@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:calculator_application/utils/globals.dart' as globals;
+import 'package:google_fonts/google_fonts.dart';
 
 class CircularButton extends StatelessWidget {
   const CircularButton({
@@ -46,7 +47,10 @@ class CircularButton extends StatelessWidget {
     } else if (label != null) {
       return Text(
         label!,
-        style: TextStyle(fontSize: diameterOfBtn * 0.40),
+        style: GoogleFonts.roboto(
+          fontSize: diameterOfBtn * 0.40,
+          fontWeight: FontWeight.w500,
+        ),
       );
     } else {
       return ImageIcon(

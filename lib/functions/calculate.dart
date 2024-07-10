@@ -23,6 +23,10 @@ String addAsterisk(String expression) {
       temp += 'x';
     } else if (i > 0 && expression[i - 1] == ')' && isDigit(expression[i])) {
       temp += 'x';
+    } else if (i > 0 &&
+        expression[i] == '(' &&
+        (expression[i - 1] == '+' || expression[i - 1] == '-')) {
+      temp += '1x';
     }
     temp += expression[i];
   }
@@ -66,6 +70,7 @@ List<String> getPostFix(String expression) {
 
     //* case 2: open parenthesis
     if (ch == '(') {
+      if (postFix.isEmpty) {}
       op.push(ch);
     }
 
@@ -167,9 +172,11 @@ String getResult(String expression) {
 
   //* add * where it is not present
   tempExp = addAsterisk(tempExp);
+  print(tempExp);
 
   //* get postfix of expression
   List<String> postFix = getPostFix(tempExp);
+  print(postFix);
 
   //* Check for invalid operation
   if (isInvalidOperaition(postFix)) {
