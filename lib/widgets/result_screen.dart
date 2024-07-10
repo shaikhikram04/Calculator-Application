@@ -12,7 +12,7 @@ class ResultScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     var data = ref.watch(resultDataProvider);
     String compressedResult = data.result;
-    if (data.result.isNotEmpty && !data.result.startsWith('I')) {
+    if (data.result.isNotEmpty && data.result != 'Invalid Operation') {
       double ans = double.parse(data.result);
       compressedResult = ans.toString();
     }
@@ -37,9 +37,10 @@ class ResultScreen extends ConsumerWidget {
                   child: Text(
                     data.expression,
                     style: GoogleFonts.firaCode(
-                        color: Colors.white,
-                        fontSize: 40,
-                        fontWeight: FontWeight.w300),
+                      color: Colors.white,
+                      fontSize: 40,
+                      fontWeight: FontWeight.w300,
+                    ),
                   ),
                 ),
               ),
@@ -52,7 +53,10 @@ class ResultScreen extends ConsumerWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     compressedResult,
-                    style: GoogleFonts.lato(color: Colors.white, fontSize: 50),
+                    style: GoogleFonts.lato(
+                      color: Colors.white,
+                      fontSize: 50,
+                    ),
                     textAlign: TextAlign.right,
                   ),
                 ),
