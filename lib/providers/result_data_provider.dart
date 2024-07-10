@@ -11,7 +11,7 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   bool isOperator(String ch) {
     return (ch == '+' ||
         ch == '-' ||
-        ch == '*' ||
+        ch == 'x' ||
         ch == '÷' ||
         ch == '^' ||
         ch == '%');
