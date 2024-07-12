@@ -1,6 +1,7 @@
 # Miscellaneous
 *.class
 *.log
+*.lock
 *.pyc
 *.swp
 .DS_Store
@@ -32,10 +33,12 @@ migrate_working_dir/
 /build/
 android/
 ios/
-macros/
+macos/
 test/
 web/
 windows/
+linux/
+/analysis_options.yaml
 
 # Symbolication related
 app.*.symbols
