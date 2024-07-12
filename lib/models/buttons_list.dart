@@ -88,7 +88,6 @@ List<CircularButton> getUpperButtons(WidgetRef ref) {
       icon: CupertinoIcons.add,
       btnColor: operatorBtnColor,
       onClick: () {
-        
         ref.read(resultDataProvider.notifier).replaceOperator('+');
       },
     ),
@@ -110,7 +109,7 @@ List<Widget> getLowerButtons(WidgetRef ref) {
     CircularButton.image(
       image: const AssetImage('assets/images/negate_icon.png'),
       btnColor: numberedBtnColor,
-      onClick: () {},
+      onClick: ref.read(resultDataProvider.notifier).negate,
     ),
     CircularButton(
       label: '0',

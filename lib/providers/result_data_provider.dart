@@ -39,7 +39,17 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   }
 
   void negate() {
-    if (state.expression[0] == '+' || state.expression[0] == '-') {}
+    if (state.expression[0] == '+') {
+      state = ResultData(
+          '-${state.expression.substring(1, state.expression.length)}',
+          state.result);
+    } else if (state.expression[0] == '-') {
+      state = ResultData(
+          '+${state.expression.substring(1, state.expression.length)}',
+          state.result);
+    } else {
+      state = ResultData('-${state.expression}', state.result);
+    }
   }
 
   void calculate() {
