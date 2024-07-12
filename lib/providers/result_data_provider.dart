@@ -22,7 +22,7 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   void delExpression() {
     if (state.expression.isNotEmpty) {
       state = ResultData(
-        state.expression.substring(0, state.expression.length - 1),
+        state.expression,
         state.result,
       );
     }
@@ -32,8 +32,14 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
     if (state.expression.isNotEmpty &&
         isOperator(state.expression[state.expression.length - 1])) {
       delExpression();
+    } else if (state.expression.isEmpty) {
+      addExpression('0');
     }
     addExpression(optr);
+  }
+
+  void negate() {
+    if (state.expression[0] == '+' || state.expression[0] == '-') {}
   }
 
   void calculate() {

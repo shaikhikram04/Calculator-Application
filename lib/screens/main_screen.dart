@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:calculator_application/functions/buttons_list.dart';
+import 'package:calculator_application/models/buttons_list.dart';
 import 'package:calculator_application/screens/history_screen.dart';
 import 'package:calculator_application/widgets/buttons/buttons.dart';
 import 'package:calculator_application/widgets/buttons/circular_button.dart';
