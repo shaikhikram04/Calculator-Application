@@ -22,16 +22,22 @@ class ResultDataNotifier extends StateNotifier<ResultData> {
   void delExpression() {
     if (state.expression.isNotEmpty) {
       state = ResultData(
-        state.expression,
+        state.expression.substring(0, state.expression.length - 1),
         state.result,
       );
     }
   }
 
   void replaceOperator(String optr) {
-    if (state.expression.isNotEmpty &&
-        isOperator(state.expression[state.expression.length - 1])) {
-      delExpression();
+    if (state.expression.isNotEmpty) {
+      if (optr == '+' || optr == '-') {
+        state = ResultData(state.expression, getResult(state.expression));
+        if (state.expression != state.result) {
+          ref.read(searchHistoryProvider.notifier).addData(state);
+        }
+      } else if (isOperator(state.expression[state.expression.length - 1])) {
+        delExpression();
+      }
     } else if (state.expression.isEmpty) {
       addExpression('0');
     }
